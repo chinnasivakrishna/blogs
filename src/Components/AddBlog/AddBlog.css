@@ -1,0 +1,89 @@
+.add-blog-container {
+  margin-top: 80px;
+  padding: 20px;
+  width: 80%;
+  margin: auto;
+  background-color: #f4f4f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-blog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.image-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.new-content-form {
+  padding: 20px;
+  background-color: #e9ecef;
+  border-radius: 5px;
+}
+
+.content-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.remove-content-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  background-color: #FF5C5C;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.remove-content-btn:hover {
+  background-color: #FF1C1C;
+}
+
+.submit-blog-btn,
+.add-content-btn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  color: white;
+  background-color: #4F46E5;
+  transition: background-color 0.3s;
+}
+
+.submit-blog-btn:hover,
+.add-content-btn:hover {
+  background-color: #6947BF;
+}

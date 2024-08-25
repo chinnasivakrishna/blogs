@@ -1,0 +1,47 @@
+/* src/components/Home.css */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: transparent;
+  margin-top: -260px;
+}
+
+
+
+.blog-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.blog-list-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.blog-list-item:hover {
+  background-color: #f9f9f9;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.blog-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #555;
+  margin: 0;
+}
+
+/* src/Components/Home/Home.css */
+mark {
+  background-color: yellow;
+  color: black;
+}
