@@ -1,6 +1,5 @@
 .my-blogs-container {
   padding: 20px;
-  position: relative;
 }
 
 .my-blogs-title {
@@ -45,7 +44,6 @@
 }
 
 .edit-blog-overlay {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
