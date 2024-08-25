@@ -44,7 +44,7 @@ const MyBlogs = () => {
   const handleDelete = async (blogId) => {
     const token = Cookies.get('jwt_token');
     try {
-      await axios.delete(`http://localhost:5000/api/blogs/${blogId}`, {
+      await axios.delete(`https://blogs-backend-qn2y.onrender.com/api/blogs/${blogId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBlogs(blogs.filter(blog => blog._id !== blogId));
@@ -56,7 +56,7 @@ const MyBlogs = () => {
   const handleEdit = async (blogId) => {
     const token = Cookies.get('jwt_token');
     try {
-      const response = await axios.get(`http://localhost:5000/api/blogs/${blogId}`, {
+      const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/blogs/${blogId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEditBlog(response.data);
@@ -69,7 +69,7 @@ const MyBlogs = () => {
   const handleUpdate = async () => {
     const token = Cookies.get('jwt_token');
     try {
-      await axios.put(`http://localhost:5000/api/blogs/${editBlog._id}`, editBlog, {
+      await axios.put(`https://blogs-backend-qn2y.onrender.com/api/blogs/${editBlog._id}`, editBlog, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBlogs(blogs.map(blog => (blog._id === editBlog._id ? editBlog : blog)));
