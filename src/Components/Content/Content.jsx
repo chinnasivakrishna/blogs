@@ -74,8 +74,8 @@ function Content() {
           <div className="content-body">
             {blog.contents.map((section, index) => (
               <div key={index} className="content-section">
-                {section.heading && <h2>{section.heading}</h2>}
-                {section.image && <img src={section.image} alt={section.heading || 'Content Image'} />}
+                {section.title && <h2 className="content-title">{section.title}</h2>}
+                {section.image && <img src={section.image} alt={section.title || 'Content Image'} />}
                 <p>{section.description}</p>
               </div>
             ))}
