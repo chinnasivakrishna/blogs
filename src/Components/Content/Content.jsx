@@ -26,7 +26,7 @@ function Content() {
     // Function to fetch comments for the blog
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/blogs/${blogId}/comments`);
+        const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/blogs/${blogId}/comments`);
         setComments(response.data); // Set the comments in the state
       } catch (error) {
         console.error('Error fetching comments:', error);
@@ -44,7 +44,7 @@ function Content() {
     const token = Cookies.get('jwt_token'); // Retrieve JWT token from cookies for authentication
     try {
       await axios.post(
-        `http://localhost:5000/api/${blogId}/comments`,
+        `https://blogs-backend-qn2y.onrender.com/api/${blogId}/comments`,
         { content: comment },
         {
           headers: {
@@ -55,7 +55,7 @@ function Content() {
       setComment(''); // Clear the comment input field after submission
 
       // Refresh the comments list after adding a new comment
-      const response = await axios.get(`http://localhost:5000/api/${blogId}/comments`);
+      const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/${blogId}/comments`);
       setComments(response.data); // Update the comments state
     } catch (error) {
       console.error('Error posting comment:', error);
