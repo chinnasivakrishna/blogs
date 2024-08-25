@@ -67,7 +67,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
-
 }
 
 .edit-blog-form .form-group {
@@ -125,4 +124,77 @@
 
 .edit-blog-form button:hover {
   opacity: 0.8;
+}
+
+/* Styles for content items */
+.content-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.content-item h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.content-item img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.content-item p {
+  margin: 10px 0;
+}
+
+.content-item button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.content-item button:hover {
+  opacity: 0.8;
+}
+
+.new-content-form {
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+  margin-top: 15px;
+}
+
+.new-content-form .form-group {
+  margin-bottom: 15px;
+}
+
+.new-content-form .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.new-content-form .form-group input[type="text"],
+.new-content-form .form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.new-content-form .form-group input[type="file"] {
+  display: block;
+  margin-top: 10px;
+}
+
+.new-content-form .image-preview {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
 }
