@@ -182,9 +182,45 @@ const MyBlogs = () => {
               <h2>Contents</h2>
               {editBlog.contents && editBlog.contents.map((content, index) => (
                 <div key={index} className="content-item">
-                  <h3>{content.title}</h3>
-                  {content.image && <img src={content.image} alt={content.title} className="image-preview" />}
-                  <p>{content.description}</p>
+                  <div className="form-group">
+                    <label>Content Title</label>
+                    <input 
+                      type="text" 
+                      value={content.title} 
+                      onChange={(e) => {
+                        const updatedContents = [...editBlog.contents];
+                        updatedContents[index].title = e.target.value;
+                        setEditBlog({ ...editBlog, contents: updatedContents });
+                      }}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Content Image</label>
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file) {
+                          const updatedContents = [...editBlog.contents];
+                          updatedContents[index].image = URL.createObjectURL(file);
+                          setEditBlog({ ...editBlog, contents: updatedContents });
+                        }
+                      }}
+                    />
+                    {content.image && <img src={content.image} alt={content.title} className="image-preview" />}
+                  </div>
+                  <div className="form-group">
+                    <label>Content Description</label>
+                    <textarea 
+                      value={content.description} 
+                      onChange={(e) => {
+                        const updatedContents = [...editBlog.contents];
+                        updatedContents[index].description = e.target.value;
+                        setEditBlog({ ...editBlog, contents: updatedContents });
+                      }}
+                    />
+                  </div>
                   <button type="button" onClick={() => handleEditContent(index)}>Edit</button>
                   <button type="button" onClick={() => handleRemoveContent(index)}>Remove</button>
                 </div>
