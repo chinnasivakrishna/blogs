@@ -50,6 +50,7 @@ function Content() {
       setComment('');
       const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/posts/${blogId}/comments`);
       setComments(response.data);
+      console.log(response.data)
     } catch (error) {
       console.error('Error posting comment:', error);
     }
