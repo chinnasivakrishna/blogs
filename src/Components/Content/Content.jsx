@@ -23,7 +23,8 @@ function Content() {
     const fetchComments = async () => {
       try {
         const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/posts/${blogId}/comments`);
-        setComments(response.data);
+        setComments(response.data);  // response.data now includes user names and comments
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching comments:', error);
       }
@@ -49,9 +50,7 @@ function Content() {
       );
       setComment('');
       const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/posts/${blogId}/comments`);
-      setComments(response.data);
-      console.log(response.data)
-      console.log("hiis")
+      setComments(response.data); // Fetch updated comments after posting
     } catch (error) {
       console.error('Error posting comment:', error);
     }
@@ -91,7 +90,7 @@ function Content() {
             <ul className="comments-list">
               {comments.map((c, index) => (
                 <li key={index} className="comment-item">
-                  <strong>{c.user.name}:</strong> <p>{c.content}</p>
+                  <strong>{c.name}:</strong> <p>{c.content}</p>
                   <span className="comment-date">{new Date(c.date).toLocaleString()}</span>
                 </li>
               ))}
