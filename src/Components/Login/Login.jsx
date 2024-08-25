@@ -42,7 +42,7 @@ const Login = () => {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await axios.post("http://localhost:5000/api/login", {
+        const response = await axios.post("https://blogs-backend-qn2y.onrender.com/api/login", {
           Email: id,
           Password: password
         });

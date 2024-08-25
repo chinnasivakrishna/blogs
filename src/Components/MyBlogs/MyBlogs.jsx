@@ -16,7 +16,7 @@ const MyBlogs = () => {
     const fetchUserBlogs = async () => {
       const token = Cookies.get('jwt_token');
       try {
-        const response = await axios.get('http://localhost:5000/api/blogs/my-blogs', {
+        const response = await axios.get('https://blogs-backend-qn2y.onrender.com/api/blogs/my-blogs', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBlogs(response.data);

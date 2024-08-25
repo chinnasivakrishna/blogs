@@ -89,7 +89,7 @@ function AddBlog() {
     try {
       // Send blog to backend with the Authorization header
       const response = await axios.post(
-        'http://localhost:5000/api/blogs',
+        'https://blogs-backend-qn2y.onrender.com/api/blogs',
         blog,
         {
           headers: {

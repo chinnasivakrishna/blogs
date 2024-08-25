@@ -48,7 +48,7 @@ const Register = () => {
     if (validate()) {
       setIsSubmitted(true);
       try {
-        const response = await axios.post("http://localhost:5000/api/add", {
+        const response = await axios.post("https://blogs-backend-qn2y.onrender.com/api/add", {
           Name: username,
           Email: email,
           Password: password,

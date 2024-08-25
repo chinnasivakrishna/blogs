@@ -13,7 +13,7 @@ function Content() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/blogs/${blogId}`);
+        const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/blogs/${blogId}`);
         setBlog(response.data);
       } catch (error) {
         console.error('Error fetching blog:', error);
