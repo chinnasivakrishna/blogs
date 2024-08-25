@@ -7,7 +7,7 @@ import AddBlog from './Components/AddBlog/AddBlog';
 import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
-import ProtectedRoute from './Components/ProtectedRoute'; // Import ProtectedRoute
+import ProtectedRoute from './Components/ProtectedRoute'; 
 import MyBlogs from './Components/MyBlogs/MyBlogs';
 import Content from './Components/Content/Content';
 
