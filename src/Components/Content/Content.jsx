@@ -39,7 +39,7 @@ function Content() {
     const token = Cookies.get('jwt_token');
     try {
       await axios.post(
-        `https://blogs-backend-qn2y.onrender.com/api/${blogId}/comments`,
+        `https://blogs-backend-qn2y.onrender.com/api/blogs/${blogId}/comments`,
         { content: comment },
         {
           headers: {
@@ -48,7 +48,7 @@ function Content() {
         }
       );
       setComment('');
-      const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/${blogId}/comments`);
+      const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/blogs/${blogId}/comments`);
       setComments(response.data);
     } catch (error) {
       console.error('Error posting comment:', error);
