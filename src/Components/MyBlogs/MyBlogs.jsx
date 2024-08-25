@@ -10,6 +10,7 @@ const MyBlogs = () => {
   const [imagePreview, setImagePreview] = useState('');
   const [newContentPreview, setNewContentPreview] = useState('');
   const [newContent, setNewContent] = useState({ title: '', image: null, description: '' });
+  const [editedContentIndex, setEditedContentIndex] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,7 +79,7 @@ const MyBlogs = () => {
     }
   };
 
-  const handleImageUpload = async (e) => {
+  const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       setEditBlog({ ...editBlog, image: file });
@@ -86,7 +87,7 @@ const MyBlogs = () => {
     }
   };
 
-  const handleContentImageUpload = async (e) => {
+  const handleContentImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       setNewContent({ ...newContent, image: file });
@@ -101,6 +102,29 @@ const MyBlogs = () => {
     });
     setNewContent({ title: '', image: null, description: '' });
     setNewContentPreview('');
+  };
+
+  const handleEditContent = (index) => {
+    setEditedContentIndex(index);
+    setNewContent(editBlog.contents[index]);
+    setNewContentPreview(editBlog.contents[index].image);
+  };
+
+  const handleUpdateContent = () => {
+    const updatedContents = editBlog.contents.map((content, index) =>
+      index === editedContentIndex ? newContent : content
+    );
+    setEditBlog({ ...editBlog, contents: updatedContents });
+    setEditedContentIndex(null);
+    setNewContent({ title: '', image: null, description: '' });
+    setNewContentPreview('');
+  };
+
+  const handleRemoveContent = (index) => {
+    setEditBlog({
+      ...editBlog,
+      contents: editBlog.contents.filter((_, i) => i !== index)
+    });
   };
 
   return (
@@ -161,6 +185,8 @@ const MyBlogs = () => {
                   <h3>{content.title}</h3>
                   {content.image && <img src={content.image} alt={content.title} className="image-preview" />}
                   <p>{content.description}</p>
+                  <button type="button" onClick={() => handleEditContent(index)}>Edit</button>
+                  <button type="button" onClick={() => handleRemoveContent(index)}>Remove</button>
                 </div>
               ))}
 
@@ -189,8 +215,8 @@ const MyBlogs = () => {
                     onChange={(e) => setNewContent({ ...newContent, description: e.target.value })}
                   />
                 </div>
-                <button type="button" onClick={handleAddContent} className="add-content-btn">
-                  Add Content
+                <button type="button" onClick={editedContentIndex !== null ? handleUpdateContent : handleAddContent} className="add-content-btn">
+                  {editedContentIndex !== null ? 'Update Content' : 'Add Content'}
                 </button>
               </div>
 
