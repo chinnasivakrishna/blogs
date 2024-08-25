@@ -15,7 +15,6 @@ function Content() {
       try {
         const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/posts/${blogId}`);
         setBlog(response.data);
-        console.log(response.data)
       } catch (error) {
         console.error('Error fetching blog:', error);
       }
@@ -24,7 +23,7 @@ function Content() {
     const fetchComments = async () => {
       try {
         const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/posts/${blogId}/comments`);
-        setComments(response.data);  // response.data now includes user names and comments
+        setComments(response.data);
         console.log(response.data);
       } catch (error) {
         console.error('Error fetching comments:', error);
@@ -51,7 +50,7 @@ function Content() {
       );
       setComment('');
       const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/posts/${blogId}/comments`);
-      setComments(response.data); // Fetch updated comments after posting
+      setComments(response.data);
     } catch (error) {
       console.error('Error posting comment:', error);
     }
@@ -72,9 +71,18 @@ function Content() {
           <div className="content-image">
             <img src={blog.image} alt="Blog" />
           </div>
-          <div className="content-footer">
-            <h2>Contents</h2>
-            <p>{blog.contents.map((c, i) => <span key={i}>{c.description}</span>)}</p>
+          <div className="content-body">
+            {blog.contents.map((section, index) => (
+              <div key={index} className="content-section">
+                {section.heading && <h2>{section.heading}</h2>}
+                {section.image && <img src={section.image} alt={section.heading || 'Content Image'} />}
+                <p>{section.description}</p>
+              </div>
+            ))}
+          </div>
+          <div className="content-conclusion">
+            <h2>Conclusion</h2>
+            <p>{blog.conclusion}</p>
           </div>
           <div className="comments-section">
             <h2>Comments</h2>
