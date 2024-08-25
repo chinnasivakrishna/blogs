@@ -16,7 +16,7 @@ const MyBlogs = () => {
     const fetchUserBlogs = async () => {
       const token = Cookies.get('jwt_token');
       try {
-        const response = await axios.get('https://blogs-backend-qn2y.onrender.com/api/blogs/my-blogs', {
+        const response = await axios.get('https://blogs-backend-qn2y.onrender.com/api/posts/my-blogs', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBlogs(response.data);
@@ -29,7 +29,6 @@ const MyBlogs = () => {
   }, []);
 
   useEffect(() => {
-    // Disable background scroll when the overlay is active
     if (editBlog) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -44,7 +43,7 @@ const MyBlogs = () => {
   const handleDelete = async (blogId) => {
     const token = Cookies.get('jwt_token');
     try {
-      await axios.delete(`https://blogs-backend-qn2y.onrender.com/api/blogs/${blogId}`, {
+      await axios.delete(`https://blogs-backend-qn2y.onrender.com/api/posts/${blogId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBlogs(blogs.filter(blog => blog._id !== blogId));
@@ -56,11 +55,11 @@ const MyBlogs = () => {
   const handleEdit = async (blogId) => {
     const token = Cookies.get('jwt_token');
     try {
-      const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/blogs/${blogId}`, {
+      const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/posts/${blogId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEditBlog(response.data);
-      setImagePreview(response.data.image); // Set image preview for the current blog
+      setImagePreview(response.data.image); 
     } catch (error) {
       console.error('Error fetching blog for editing:', error);
     }
@@ -69,7 +68,7 @@ const MyBlogs = () => {
   const handleUpdate = async () => {
     const token = Cookies.get('jwt_token');
     try {
-      await axios.put(`https://blogs-backend-qn2y.onrender.com/api/blogs/${editBlog._id}`, editBlog, {
+      await axios.put(`https://blogs-backend-qn2y.onrender.com/api/posts/${editBlog._id}`, editBlog, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBlogs(blogs.map(blog => (blog._id === editBlog._id ? editBlog : blog)));

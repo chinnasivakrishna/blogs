@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './Header.css';
 import { useNavigate, Link } from 'react-router-dom';
-import Cookies from 'js-cookie'; // Import Cookies library
+import Cookies from 'js-cookie'; 
 
 function Header() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // State to check if user is authenticated
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the JWT token is present in the cookies
     const token = Cookies.get('jwt_token');
-    setIsAuthenticated(!!token); // Set isAuthenticated based on the presence of the token
+    setIsAuthenticated(!!token); 
   }, []);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
-    navigate(`/?search=${encodeURIComponent(event.target.value)}`); // Update the URL with the search query
+    navigate(`/?search=${encodeURIComponent(event.target.value)}`); 
   };
 
   const handleLogout = () => {
-    Cookies.remove('jwt_token'); // Remove the token from cookies
-    setIsAuthenticated(false); // Set isAuthenticated to false after logout
-    navigate('/'); // Redirect to home page after logout
+    Cookies.remove('jwt_token'); 
+    setIsAuthenticated(false);
+    navigate('/');
   };
 
   return (

@@ -13,7 +13,7 @@ function Content() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/blogs/${blogId}`);
+        const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/posts/${blogId}`);
         setBlog(response.data);
       } catch (error) {
         console.error('Error fetching blog:', error);
@@ -22,7 +22,7 @@ function Content() {
 
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/blogs/${blogId}/comments`);
+        const response = await axios.get(`https://blogs-backend-qn2y.onrender.com/api/posts/${blogId}/comments`);
         setComments(response.data);
       } catch (error) {
         console.error('Error fetching comments:', error);
@@ -48,7 +48,6 @@ function Content() {
         }
       );
       setComment('');
-      // Refresh comments
       const response = await axios.get(`http://localhost:5000/api/${blogId}/comments`);
       setComments(response.data);
     } catch (error) {

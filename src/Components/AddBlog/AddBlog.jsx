@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie'; // Import Cookies
+import Cookies from 'js-cookie'; 
 import './AddBlog.css';
 
 function AddBlog() {
@@ -12,42 +12,37 @@ function AddBlog() {
   const [newContent, setNewContent] = useState({ title: '', image: null, description: '' });
   const [newContentPreview, setNewContentPreview] = useState('');
   
-  // Added state to handle Cloudinary image URLs
   const [imageUrl, setImageUrl] = useState('');
-  const [contentImages, setContentImages] = useState([]); // To store image URLs for each content
+  const [contentImages, setContentImages] = useState([]); 
 
-  // Handler for main blog image upload
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     setImage(file);
     setImagePreview(URL.createObjectURL(file));
 
-    // Upload to Cloudinary
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'post_blog'); // Replace with your actual upload preset
+    formData.append('upload_preset', 'post_blog'); 
 
     try {
       const response = await axios.post(
         'https://api.cloudinary.com/v1_1/dsbuzlxpw/image/upload',
         formData
       );
-      setImageUrl(response.data.secure_url); // Save Cloudinary URL
+      setImageUrl(response.data.secure_url); 
     } catch (error) {
       console.error('Error uploading image:', error.message);
     }
   };
 
-  // Handler for new content image upload
   const handleContentImageUpload = async (e) => {
     const file = e.target.files[0];
     setNewContent({ ...newContent, image: file });
     setNewContentPreview(URL.createObjectURL(file));
 
-    // Upload to Cloudinary
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'post_blog'); // Replace with your actual upload preset
+    formData.append('upload_preset', 'post_blog'); 
 
     try {
       const response = await axios.post(
@@ -75,7 +70,6 @@ function AddBlog() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Construct blog object with Cloudinary URLs
     const blog = {
       title,
       image: imageUrl,
@@ -83,17 +77,15 @@ function AddBlog() {
       conclusion,
     };
 
-    // Get the token from cookies
     const token = Cookies.get('jwt_token');
 
     try {
-      // Send blog to backend with the Authorization header
       const response = await axios.post(
-        'https://blogs-backend-qn2y.onrender.com/api/blogs',
+        'https://blogs-backend-qn2y.onrender.com/api/posts',
         blog,
         {
           headers: {
-            Authorization: `Bearer ${token}` // Include the JWT token in headers
+            Authorization: `Bearer ${token}`
           }
         }
       );

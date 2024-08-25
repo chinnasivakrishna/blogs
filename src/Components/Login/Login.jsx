@@ -49,7 +49,6 @@ const Login = () => {
 
         const { token } = response.data;
 
-        // Store JWT token in cookies
         Cookies.set('jwt_token', token, { expires: 30 });
 
         navigate('/', { state: { email: id } });
