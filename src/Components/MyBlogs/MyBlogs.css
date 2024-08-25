@@ -56,7 +56,6 @@
   justify-content: center;
   z-index: 1000;
   overflow: auto;
-  /* Allow scrolling if content overflows */
 }
 
 .edit-blog-form {
@@ -66,11 +65,9 @@
   width: 80%;
   max-width: 800px;
   max-height: 90vh;
-  /* Limit height to ensure it fits within the viewport */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: auto;
-  /* Allow scrolling inside the modal */
 }
 .edit-blog-form .form-group {
   margin-bottom: 15px;
