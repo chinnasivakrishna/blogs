@@ -1,70 +1,121 @@
-# Getting Started with Create React App
+Here's a documentation outline for the front-end part of project:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## Front-End Documentation
 
-In the project directory, you can run:
+### Overview
 
-### `npm start`
+The front-end of this project is built using React. It provides an interface for users to interact with a blogging platform, allowing them to view, add, edit, and delete blogs. The application includes several components and routing to manage user navigation and protected routes. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Key Components
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **App Component (`App.js`)**
 
-### `npm test`
+   The `App` component is the root component that sets up routing for the application. It uses `react-router-dom` for navigation and includes the following routes:
+   - `/login`: Renders the `Login` component.
+   - `/register`: Renders the `Register` component.
+   - `/`: Renders the `Home` component inside a `Layout` that includes a sidebar.
+   - `/add-blog`: Renders the `AddBlog` component wrapped in a `ProtectedRoute` to restrict access to authenticated users.
+   - `/my-blog`: Renders the `MyBlogs` component, also wrapped in a `ProtectedRoute`.
+   - `/blog/:id`: Renders the `Content` component, showing detailed information about a specific blog, protected by `ProtectedRoute`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```jsx
+   function App() {
+     return (
+       <Router>
+         <Header />
+         <Routes>
+           <Route path="/login" element={<Login />} />
+           <Route path="/register" element={<Register />} />
+           <Route path="/" element={<Layout><Home /></Layout>} />
+           <Route path="/add-blog" element={<ProtectedRoute><Layout><AddBlog /></Layout></ProtectedRoute>} />
+           <Route path="/my-blog" element={<ProtectedRoute><Layout><MyBlogs /></Layout></ProtectedRoute>} />
+           <Route path="/blog/:id" element={<ProtectedRoute><Layout><Content /></Layout></ProtectedRoute>} />
+         </Routes>
+       </Router>
+     );
+   }
+   ```
 
-### `npm run build`
+2. **ProtectedRoute Component (`ProtectedRoute.js`)**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   The `ProtectedRoute` component checks for an authentication token in cookies. If the token exists, it renders the child components; otherwise, it redirects the user to the login page.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```jsx
+   const ProtectedRoute = ({ children }) => {
+     const token = Cookies.get('jwt_token');
+     return token ? children : <Navigate to="/login" />;
+   };
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **MyBlogs Component (`MyBlogs.js`)**
 
-### `npm run eject`
+   The `MyBlogs` component allows users to view, edit, and delete their blogs. It fetches the user's blogs from an API and displays them in a list. Users can update or delete individual blogs and add new content to existing blogs.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   - **State Management**: Manages state for blogs, editing mode, and image previews.
+   - **API Integration**: Fetches blogs, updates, and deletes using `axios`.
+   - **Event Handlers**: Handles blog clicks, deletion, and updates with form submissions and file uploads.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. **Home Component (`Home.js`)**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   The `Home` component displays a list of all blogs. It includes a search feature to filter blogs based on the search query. Users can click on a blog to view detailed content.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   - **State Management**: Manages state for blogs and search queries.
+   - **API Integration**: Fetches all blogs from the API and filters them based on the search query.
 
-## Learn More
+5. **Header Component (`Header.js`)**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   The `Header` component provides navigation and search functionality. It includes buttons for login, logout, and joining, with conditional rendering based on authentication status.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   - **State Management**: Manages search input and authentication state.
+   - **Event Handlers**: Handles search input changes and logout functionality.
 
-### Code Splitting
+6. **Content Component (`Content.js`)**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   The `Content` component shows detailed information about a single blog, including the title, image, and content sections. It also handles user comments, allowing authenticated users to post and view comments.
 
-### Analyzing the Bundle Size
+   - **State Management**: Manages state for the blog, comments, and comment input.
+   - **API Integration**: Fetches blog details and comments, posts new comments.
+   - **Event Handlers**: Handles comment submission and blog detail display.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Styling
 
-### Making a Progressive Web App
+Each component has a corresponding CSS file for styling:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- `App.css`: General app-wide styles.
+- `Header.css`: Styles for the header component.
+- `Home.css`: Styles for the home page.
+- `MyBlogs.css`: Styles for the MyBlogs component.
+- `Content.css`: Styles for the content page.
 
-### Advanced Configuration
+### Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **React**: A JavaScript library for building user interfaces.
+- **react-router-dom**: A library for handling routing in React applications.
+- **axios**: A promise-based HTTP client for making API requests.
+- **js-cookie**: A library for handling cookies.
 
-### Deployment
+### How to Run
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Install dependencies:
 
-### `npm run build` fails to minify
+   ```bash
+   npm install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. Start the development server:
+
+   ```bash
+   npm start
+   ```
+
+3. Navigate to `http://localhost:3000` in your browser to view the application.
+
+### Additional Notes
+
+- Ensure that the backend API endpoints are correctly configured and accessible.
+- Authentication tokens should be properly managed and secured.
+
+---
+
