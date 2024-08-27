@@ -23,10 +23,13 @@ function Header() {
     setIsAuthenticated(false);
     navigate('/');
   };
+  const home = () =>{
+    navigate('/')
+  }
 
   return (
     <div className="header">
-      <div className="header-logo">ZuAi</div>
+      <div className="header-logo" onClick={home}>ZuAi</div>
 
       <div className="search-container">
         <input
